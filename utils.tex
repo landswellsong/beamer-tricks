@@ -1,0 +1,47 @@
+% Assuming documentclass=beamer
+
+% XeLaTeX stuff
+\usepackage{fontspec}
+\usepackage{xltxtra}
+\usepackage{xunicode}
+\setsansfont{Ubuntu}
+\newfontfamily{\cyrillicfonttt}{Ubuntu Mono}
+\newfontfamily{\cyrillicfont}{Ubuntu}
+% TODO: mono font
+% TODO: stress marks
+
+% Code listings
+\usepackage{minted}
+\newminted{py}{escapeinside=||,linenos=true} % magic!
+
+% Arrows et al
+\usepackage{tikz}
+\usetikzlibrary{tikzmark, shadows, shapes.callouts, calc}
+% http://tex.stackexchange.com/questions/58188/beamer-source-code-highlighting-annotation-tips
+\tikzset{notice/.style  = { draw, rectangle callout, callout absolute pointer={#1}, rounded corners,fill=gray!20,drop shadow,font=\footnotesize} }
+
+% Environment for making tikz stuff invisible
+\newenvironment{tikzstuff}
+    {\setbeamercovered{invisible}\begin{tikzpicture}[remember picture, overlay]
+    \coordinate (belowright) at (0.5, -0.7); % TODO: above versions should point slightly above the actual point
+    \coordinate (aboveright) at (0.5, 0.7);  % hint: make 2 styles "above" and "below" or 2 commands 
+    \coordinate (belowleft) at (-0.5, -0.7);
+    \coordinate (aboveleft) at (-0.5, 0.7);}
+    {\end{tikzpicture}\setbeamercovered{transparent}}
+
+% Place a tikz callout at anchor #1, direction #2 (see above), and text #3
+\newcommand{\callout}[3]{\node[notice={(pic cs:#1)}] at ($(pic cs:#1) + (#2)$) {#3};}
+
+% Shortcut for tikzmark
+\newcommand{\tm}[1]{\tikzmark{#1}}
+
+% Make footnotes smaller
+\setbeamerfont{footnote}{size=\tiny}
+
+% Color the URL links but don't interfere with Beamer otherwise
+\hypersetup{colorlinks,linkcolor=}
+
+% Word wrap
+\usepackage{polyglossia}
+\setdefaultlanguage{ukrainian}
+\setotherlanguages{english,russian}
