@@ -18,7 +18,11 @@
 \usepackage{tikz}
 \usetikzlibrary{tikzmark, shadows, shapes.callouts, calc}
 % http://tex.stackexchange.com/questions/58188/beamer-source-code-highlighting-annotation-tips
-\tikzset{notice/.style  = { draw, rectangle callout, callout absolute pointer={#1}, rounded corners,fill=gray!20,drop shadow,font=\footnotesize} }
+% TODO: maybe change notice name?
+\tikzset{
+    notice/.style  = { draw, rectangle callout, callout absolute pointer={#1}, rounded corners,fill=gray!20,drop shadow,font=\footnotesize},
+    highlight/.style = { draw=none, rounded corners, fill=red!40, opacity=0.4 }
+}
 
 % Environment for making tikz stuff invisible
 \newenvironment{tikzstuff}
@@ -26,11 +30,16 @@
     \coordinate (belowright) at (0.5, -0.7); % TODO: above versions should point slightly above the actual point
     \coordinate (aboveright) at (0.5, 0.7);  % hint: make 2 styles "above" and "below" or 2 commands 
     \coordinate (belowleft) at (-0.5, -0.7);
-    \coordinate (aboveleft) at (-0.5, 0.7);}
+    \coordinate (aboveleft) at (-0.5, 0.7);
+    \coordinate (highlighthigh) at (0.05, 0.30);   % TODO: debug
+    \coordinate (highlightlow) at (-0.05, -0.05);}    
     {\end{tikzpicture}\setbeamercovered{transparent}}
 
 % Place a tikz callout at anchor #1, direction #2 (see above), and text #3
 \newcommand{\callout}[3]{\node[notice={(pic cs:#1)}] at ($(pic cs:#1) + (#2)$) {#3};}
+
+% Highlight code between anchor #1 and anchor #2
+\newcommand{\highlight}[2]{\filldraw[highlight] ($(pic cs:#1) + (highlightlow)$) rectangle ($(pic cs:#2) + (highlighthigh)$);}
 
 % Shortcut for tikzmark
 \newcommand{\tm}[1]{\tikzmark{#1}}
