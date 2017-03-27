@@ -10,6 +10,19 @@
 % TODO: mono font
 % TODO: stress marks
 
+\usepackage{smartdiagram}
+\usesmartdiagramlibrary{additions}
+\smartdiagramset{back arrow disabled=true, font=\tiny, additions={
+additional item offset=0.85cm,
+additional item border color=red,
+additional item font=\tiny,
+additional connections disabled=false,
+additional arrow color=red,
+additional arrow tip=stealth,
+additional arrow line width=1pt,
+% additional arrow style=]-latex’,
+}}
+
 % Code listings
 \usepackage{minted}
 \newminted{py}{escapeinside=||,linenos=true} % magic!
@@ -29,11 +42,11 @@
 \newenvironment{tikzstuff}
     {\setbeamercovered{invisible}\begin{tikzpicture}[remember picture, overlay]
     \coordinate (belowright) at (0.5, -0.7); % TODO: above versions should point slightly above the actual point
-    \coordinate (aboveright) at (0.5, 0.7);  % hint: make 2 styles "above" and "below" or 2 commands 
+    \coordinate (aboveright) at (0.5, 0.7);  % hint: make 2 styles "above" and "below" or 2 commands
     \coordinate (belowleft) at (-0.5, -0.7);
     \coordinate (aboveleft) at (-0.5, 0.7);
     \coordinate (highlighthigh) at (0.05, 0.30);   % TODO: debug
-    \coordinate (highlightlow) at (-0.05, -0.05);}    
+    \coordinate (highlightlow) at (-0.05, -0.05);}
     {\end{tikzpicture}\setbeamercovered{transparent}}
 
 % Place a tikz callout at anchor #1, direction #2 (see above), and text #3
