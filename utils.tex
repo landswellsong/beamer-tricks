@@ -31,12 +31,20 @@ additional arrow line width=1pt,
 
 % Arrows et al
 \usepackage{tikz}
-\usetikzlibrary{tikzmark, shadows, shapes.callouts, calc}
+\usetikzlibrary{tikzmark, shadows, shapes.callouts, calc, arrows, shapes}
 % http://tex.stackexchange.com/questions/58188/beamer-source-code-highlighting-annotation-tips
 % TODO: maybe change notice name?
 \tikzset{
     notice/.style  = { draw, rectangle callout, text width = 5cm, callout absolute pointer={#1}, rounded corners,fill=gray!20,drop shadow,font=\footnotesize},
-    highlight/.style = { draw=none, rounded corners, fill=red!40, opacity=0.4 }
+    highlight/.style = { draw=none, rounded corners, fill=red!40, opacity=0.4 },
+    % http://www.texample.net/tikz/examples/simple-flow-chart/
+    decision/.style = { diamond, draw, fill=blue!20, 
+    text badly centered, node distance=1.5cm, inner sep=0pt},
+    block/.style = { rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=1em },
+    line/.style = { draw, -latex' },
+    cloud/.style = { draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em },
 }
 
 % Environment for making tikz stuff invisible
@@ -49,6 +57,12 @@ additional arrow line width=1pt,
     \coordinate (highlighthigh) at (0.05, 0.30);   % TODO: debug
     \coordinate (highlightlow) at (-0.05, -0.05);}
     {\end{tikzpicture}\setbeamercovered{transparent}}
+    
+% TODO combine with above
+\newenvironment{tikzflow}
+    {\begin{tikzpicture}[remember picture, overlay, node distance = 1cm, auto, font=\tiny]}
+    {\end{tikzpicture}}
+
 
 % Place a tikz callout at anchor #1, direction #2 (see above), and text #3
 \newcommand{\callout}[3]{\node[notice={(pic cs:#1)}] at ($(pic cs:#1) + (#2)$) {#3};}
