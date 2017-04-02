@@ -25,8 +25,9 @@ additional arrow line width=1pt,
 
 % Code listings
 \usepackage{minted}
-\newminted{py}{escapeinside=||,linenos=true} % magic!
-\newminted[pycontcode]{python}{firstnumber=last,escapeinside=||,linenos=true} % line numbers pick up from the last block TODO fix vertical spacing
+\setminted{escapeinside=||,linenos=true} % magic!
+\newminted{py}{}
+\newminted[pycontcode]{python}{firstnumber=last} % line numbers pick up from the last block TODO fix vertical spacing
 
 % Arrows et al
 \usepackage{tikz}
@@ -34,7 +35,7 @@ additional arrow line width=1pt,
 % http://tex.stackexchange.com/questions/58188/beamer-source-code-highlighting-annotation-tips
 % TODO: maybe change notice name?
 \tikzset{
-    notice/.style  = { draw, rectangle callout, callout absolute pointer={#1}, rounded corners,fill=gray!20,drop shadow,font=\footnotesize},
+    notice/.style  = { draw, rectangle callout, text width = 5cm, callout absolute pointer={#1}, rounded corners,fill=gray!20,drop shadow,font=\footnotesize},
     highlight/.style = { draw=none, rounded corners, fill=red!40, opacity=0.4 }
 }
 
